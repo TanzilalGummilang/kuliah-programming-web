@@ -1,20 +1,7 @@
 <?php 
 
-// koneksi ke db
-$conn = mysqli_connect('localhost', 'root', '', 'db_chelsea_fc');
-
-// query tampil isi tabel
-$result = mysqli_query($conn, "SELECT * FROM tbl_pemain");
-
-// ubah data tabel ke array asosiatif dan di looping
-$rows = [];
-while ($row = mysqli_fetch_assoc($result)) {
-	$rows[] = $row;
-}
-
-// tampung data tabel
-$players = $rows;
-
+require 'functions.php';
+$players = query("SELECT * FROM tbl_pemain");
 
 ?>
 
