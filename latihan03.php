@@ -1,7 +1,7 @@
 <?php 
 require 'functions.php';
 
-$players = query("SELECT * FROM tbl_pemain");
+$players = query("SELECT * FROM players_table");
 
 ?>
 
@@ -20,6 +20,7 @@ $players = query("SELECT * FROM tbl_pemain");
 		<th></th>
 		<th>Gambar</th>
 		<th>Nama</th>
+		<th>Posisi</th>
 		<th>No Punggung</th>
 		<th>Aksi</th>
 	</tr>
@@ -28,11 +29,12 @@ $players = query("SELECT * FROM tbl_pemain");
 	<?php foreach ($players as $player) : ?>
 	<tr>
 		<td><?= $i; ?></td>
-		<td align="center"><img src="img/<?= $player['gambar']; ?>" height="50"></td>
-		<td><?= $player['nama']; ?></td>
-		<td align="center"><?= $player['no_punggung']; ?></td>
+		<td align="center"><img src="img/<?= $player['image']; ?>" height="50"></td>
+		<td><?= $player['name']; ?></td>
+		<td><?= $player['position']; ?></td>
+		<td align="center"><?= $player['number']; ?></td>
 		<td>
-			<a href="detail.php?kode_pemain=<?= $player['kode_pemain']; ?>">Lihat Detail</a>
+			<a href="detail.php?player_code=<?= $player['player_code']; ?>">Lihat Detail</a>
 		</td>
 	</tr>
 	<?php $i++; ?>
