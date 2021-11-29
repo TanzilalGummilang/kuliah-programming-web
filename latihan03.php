@@ -14,11 +14,14 @@ $players = query("SELECT * FROM players_table");
 
 <h2>Data Pemain</h2>
 
+<a href="insert.php">Tambah Data</a> <br><br>
+
 <table border="1" cellpadding="10" cellspacing="0">
 
 	<tr>
 		<th></th>
 		<th>Gambar</th>
+		<th>Kode Pemain</th>
 		<th>Nama</th>
 		<th>Posisi</th>
 		<th>No Punggung</th>
@@ -30,6 +33,7 @@ $players = query("SELECT * FROM players_table");
 	<tr>
 		<td><?= $i; ?></td>
 		<td align="center"><img src="img/<?= $player['image']; ?>" height="50"></td>
+		<td align="center"><?= $player['player_code']; ?></td>
 		<td><?= $player['name']; ?></td>
 		<td><?= $player['position']; ?></td>
 		<td align="center"><?= $player['number']; ?></td>

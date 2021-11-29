@@ -4,6 +4,7 @@ function connect() {
 	return mysqli_connect('localhost', 'root', '', 'db_chelsea_fc');
 }
 
+
 function query($query) {
 	$conn = connect();
 	$result = mysqli_query($conn, $query);
@@ -19,6 +20,8 @@ function query($query) {
 	}
 	return $rows;
 }
+
+
 // format tgl lahir
 function dateFormat($dateFormat) {
 	$date = substr($dateFormat, 8, 2);
@@ -65,4 +68,32 @@ function getMonth($month) {
 			return "Desember";
 			break;
 	}
+}
+
+
+function insert($data) {
+	$conn = connect();
+
+	$playerCode = htmlspecialchars($data['playerCode']);
+	$name = htmlspecialchars($data['name']);
+	$birthPlace = htmlspecialchars($data['birthPlace']);
+	$birthDate = htmlspecialchars($data['birthDate']);
+	$height = htmlspecialchars($data['height']);
+	$nationality = htmlspecialchars($data['nationality']);
+	$image = htmlspecialchars($data['image']);
+	$number = htmlspecialchars($data['number']);
+	$position = htmlspecialchars($data['position']);
+	$positionDetail = htmlspecialchars($data['positionDetail']);
+	$salary = htmlspecialchars(intval($data['salary']));
+	$contractExpire = htmlspecialchars($data['contractExpire']);
+
+	$query = 	
+		"INSERT INTO players_table VALUES
+		('$playerCode','$name','$position','$positionDetail','$image','$number','$nationality','$birthPlace','$birthDate','$height',
+		'$salary','$contractExpire');";
+
+	mysqli_query($conn,$query);
+
+	// echo mysqli_error($conn); // cek error
+	return mysqli_affected_rows($conn);
 }
