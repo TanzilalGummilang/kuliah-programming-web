@@ -75,13 +75,13 @@ function insert($data) {
 	$conn = connect();
 
 	$playerCode = htmlspecialchars($data['playerCode']);
-	$name = htmlspecialchars($data['name']);
+	$playerName = htmlspecialchars($data['playerName']);
 	$birthPlace = htmlspecialchars($data['birthPlace']);
 	$birthDate = htmlspecialchars($data['birthDate']);
 	$height = htmlspecialchars($data['height']);
 	$nationality = htmlspecialchars($data['nationality']);
-	$image = htmlspecialchars($data['image']);
-	$number = htmlspecialchars($data['number']);
+	$playerImage = htmlspecialchars($data['playerImage']);
+	$playerNumber = htmlspecialchars($data['playerNumber']);
 	$position = htmlspecialchars($data['position']);
 	$positionDetail = htmlspecialchars($data['positionDetail']);
 	$salary = htmlspecialchars(intval($data['salary']));
@@ -89,11 +89,50 @@ function insert($data) {
 
 	$query = 	
 		"INSERT INTO players_table VALUES
-		('$playerCode','$name','$position','$positionDetail','$image','$number','$nationality','$birthPlace','$birthDate','$height',
+		('$playerCode','$playerName','$playerImage','$playerNumber','$position','$positionDetail','$nationality','$birthPlace','$birthDate','$height',
 		'$salary','$contractExpire');";
 
-	mysqli_query($conn,$query);
+	mysqli_query($conn,$query) or die(mysqli_error($conn));
+	return mysqli_affected_rows($conn);
+}
 
-	// echo mysqli_error($conn); // cek error
+function delete($playerCode) {
+	$conn = connect();
+	mysqli_query($conn, "DELETE FROM players_table WHERE player_code = '$playerCode'") or die(mysqli_error($conn));
+	return mysqli_affected_rows($conn);
+}
+
+function update($data) {
+	$conn = connect();
+
+	$playerCode = htmlspecialchars($data['playerCode']);
+	$playerName = htmlspecialchars($data['playerName']);
+	$birthPlace = htmlspecialchars($data['birthPlace']);
+	$birthDate = htmlspecialchars($data['birthDate']);
+	$height = htmlspecialchars($data['height']);
+	$nationality = htmlspecialchars($data['nationality']);
+	$playerImage = htmlspecialchars($data['playerImage']);
+	$playerNumber = htmlspecialchars($data['playerNumber']);
+	$position = htmlspecialchars($data['position']);
+	$positionDetail = htmlspecialchars($data['positionDetail']);
+	$salary = htmlspecialchars(intval($data['salary']));
+	$contractExpire = htmlspecialchars($data['contractExpire']);
+
+	$query =
+		"UPDATE players_table SET
+			player_name = '$playerName',
+			birth_place = '$birthPlace',
+			birth_date = '$birthDate',
+			height = '$height',
+			nationality = '$nationality',
+			player_image = '$playerImage',
+			player_number = '$playerNumber',
+			position = '$position',
+			position_detail = '$positionDetail',
+			salary = $salary,
+			contract_expire = '$contractExpire'
+		WHERE player_code = '$playerCode'";
+
+	mysqli_query($conn,$query) or die(mysqli_error($conn));
 	return mysqli_affected_rows($conn);
 }

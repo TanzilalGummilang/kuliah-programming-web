@@ -32,11 +32,11 @@ $players = query("SELECT * FROM players_table");
 	<?php foreach ($players as $player) : ?>
 	<tr>
 		<td><?= $i; ?></td>
-		<td align="center"><img src="img/<?= $player['image']; ?>" height="50"></td>
+		<td align="center"><img src="img/<?= $player['player_image']; ?>" height="50"></td>
 		<td align="center"><?= $player['player_code']; ?></td>
-		<td><?= $player['name']; ?></td>
+		<td><?= $player['player_name']; ?></td>
 		<td><?= $player['position']; ?></td>
-		<td align="center"><?= $player['number']; ?></td>
+		<td align="center"><?= $player['player_number']; ?></td>
 		<td>
 			<a href="detail.php?player_code=<?= $player['player_code']; ?>">Lihat Detail</a>
 		</td>

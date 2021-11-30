@@ -1,5 +1,9 @@
 <?php 
 require 'functions.php';
+if(!isset($_GET['player_code'])) {
+	header("location: index.php");
+	exit;
+}
 
 $playerCode = $_GET['player_code'];
 $player = query("SELECT * FROM players_table WHERE player_code = '$playerCode'");
@@ -19,7 +23,7 @@ $contractDateFormat = dateFormat($player['contract_expire']);
 <h2>Detail Pemain</h2>
 
 
-<img src="img/<?= $player['image']; ?>" height="100">
+<img src="img/<?= $player['player_image']; ?>" height="100">
 <br><br>
 
 <table border="1" cellpadding="5" cellspacing="1">
@@ -29,7 +33,7 @@ $contractDateFormat = dateFormat($player['contract_expire']);
 	</tr>
 	<tr>
 		<th align="left"> Nama :  </th>
-		<td><?= $player['name']; ?></td>
+		<td><?= $player['player_name']; ?></td>
 	</tr>
 	<tr>
 		<th align="left"> Tempat Lahir :  </th>
@@ -57,7 +61,7 @@ $contractDateFormat = dateFormat($player['contract_expire']);
 	</tr>
 	<tr>
 		<th align="left"> No Punggung :  </th>
-		<td><?= $player['number']; ?></td>
+		<td><?= $player['player_number']; ?></td>
 	</tr>
 	<tr>
 		<th align="left"> Gaji/Minggu :  </th>
@@ -69,8 +73,11 @@ $contractDateFormat = dateFormat($player['contract_expire']);
 	</tr>
 </table>
 
-<br>Edit | Hapus
-<br><a href="latihan03.php">Kembali ke Halaman Data Pemain</a>
+<br>
+<a href="update.php?player_code=<?= $player['player_code']; ?>">Update</a> 
+| 
+<a href="delete.php?player_code=<?= $player['player_code']; ?>" onclick="return confirm('yakin hapus data ?');">Hapus</a>
+<br><br><a href="index.php">Kembali ke Halaman Data Pemain</a>
 
 </body>
 </html>
