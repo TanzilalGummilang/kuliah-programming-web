@@ -3,6 +3,10 @@ require 'functions.php';
 
 $players = query("SELECT * FROM players_table");
 
+if(isset($_POST['searchData'])) {
+	$players = searchData($_POST['keyword']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +20,11 @@ $players = query("SELECT * FROM players_table");
 
 <a href="insert.php">Tambah Data</a> <br><br>
 
+<form action="" method="POST">
+	<input type="text" name="keyword" placeholder="masukan keyword..." size="40" autocomplete="off" autofocus>
+	<button type="submit" name="searchData">Cari</button><br><br>
+</form>
+
 <table border="1" cellpadding="10" cellspacing="0">
 
 	<tr>
@@ -27,6 +36,12 @@ $players = query("SELECT * FROM players_table");
 		<th>No Punggung</th>
 		<th>Aksi</th>
 	</tr>
+
+	<?php if(empty($players)) : ?>
+		<tr>
+			<td colspan="7"><p align="center" style="color: red; font-size: 30px; font-style: italic;">data tidak ditemukan!</p></td>
+		</tr>
+	<?php endif; ?>
 
 	<?php $i=1; ?>
 	<?php foreach ($players as $player) : ?>

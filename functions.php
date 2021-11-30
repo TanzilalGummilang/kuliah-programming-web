@@ -136,3 +136,24 @@ function update($data) {
 	mysqli_query($conn,$query) or die(mysqli_error($conn));
 	return mysqli_affected_rows($conn);
 }
+
+function searchData($keyword) {
+	$conn = connect();
+
+	$query = 
+		"SELECT * FROM players_table WHERE
+			player_code LIKE '%$keyword%' or
+			player_name LIKE '%$keyword%' or
+			position LIKE '%$keyword%' or
+			player_number LIKE '%$keyword%'
+		";
+	$result = mysqli_query($conn, $query);
+	// var_dump($result);
+
+	$rows = [];
+	while($row = mysqli_fetch_assoc($result)) {
+		$rows[] = $row;
+	}
+	return $rows;
+
+}
