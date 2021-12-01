@@ -1,7 +1,13 @@
-<?php 
+<?php
+session_start();
 require 'functions.php';
 
-if(isset($_POST['insert'])) {
+if(!isset($_SESSION['login'])) {
+   header("location: login.php");
+   exit;
+}
+
+if(isset($_POST['btnInsert'])) {
    if(insert($_POST) > 0) {
    echo  "<script>
          alert('data berhasil ditambahkan');
@@ -105,7 +111,7 @@ if(isset($_POST['insert'])) {
             <input type="date" name="contractExpire">
          </label>
       </li>
-      <button type="submit" name="insert">Tambah Data</button>
+      <button type="submit" name="btnInsert">Tambah Data</button>
    </ul>
 </form>
 

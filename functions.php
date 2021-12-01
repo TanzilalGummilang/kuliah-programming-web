@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function connect() {
 	return mysqli_connect('localhost', 'root', '', 'db_chelsea_fc');
@@ -155,5 +155,22 @@ function searchData($keyword) {
 		$rows[] = $row;
 	}
 	return $rows;
+}
 
+function login($data) {
+	$conn = connect();
+
+	$userName = htmlspecialchars($data['userName']);
+	$userPassword = htmlspecialchars($data['userPassword']);
+
+	if(query("SELECT * FROM users_table WHERE user_name = '$userName' and user_password = '$userPassword'")) {
+		$_SESSION['login'] = true;
+		header('location: index.php');
+		exit;
+	} else {
+		return [
+			'error' => true,
+			'pesan' => 'Username atau Password salah!'
+		];
+	}
 }

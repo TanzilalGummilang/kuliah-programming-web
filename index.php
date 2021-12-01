@@ -1,5 +1,11 @@
 <?php 
+session_start();
 require 'functions.php';
+
+if(!isset($_SESSION['login'])) {
+   header("location: login.php");
+   exit;
+}
 
 $players = query("SELECT * FROM players_table");
 
@@ -16,8 +22,9 @@ if(isset($_POST['searchData'])) {
 </head>
 <body>
 
-<h2>Data Pemain</h2>
 
+<a href="logout.php" onclick="return confirm('yakin logout?');">Logout</a>
+<h2>Data Pemain</h2>
 <a href="insert.php">Tambah Data</a> <br><br>
 
 <form action="" method="POST">

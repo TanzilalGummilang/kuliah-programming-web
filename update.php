@@ -1,5 +1,6 @@
 <?php 
 require 'functions.php';
+
 if(!isset($_GET['player_code'])) {
 	header("location: index.php");
 	exit;
