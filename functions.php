@@ -163,14 +163,64 @@ function login($data) {
 	$userName = htmlspecialchars($data['userName']);
 	$userPassword = htmlspecialchars($data['userPassword']);
 
-	if(query("SELECT * FROM users_table WHERE user_name = '$userName' and user_password = '$userPassword'")) {
-		$_SESSION['login'] = true;
-		header('location: index.php');
-		exit;
-	} else {
-		return [
-			'error' => true,
-			'pesan' => 'Username atau Password salah!'
-		];
+	if($user = query("SELECT * FROM users_table WHERE user_name = '$userName'")) {
+		if(password_verify($userPassword, $user['user_password'])) {
+			$_SESSION['login'] = true;
+			header('location: index.php');
+			exit;
+		}
 	}
+	return [
+		'error' => true,
+		'pesan' => 'Username atau Password salah!'
+	];
+	
+}
+
+function register($data) {
+	$conn = connect();
+
+	$userName = htmlspecialchars(strtolower($data['userName']));
+	$userPassword = mysqli_real_escape_string($conn, $data['userPassword']);
+	$userPassword02 = mysqli_real_escape_string($conn, $data['userPassword02']);
+
+	if(empty($userName) || empty($userPassword) || empty($userPassword02)) {
+		echo
+			"<script>
+				alert('Username dan Password tidak boleh kosong!');
+				document.location.href = 'register.php';
+			</script>";
+		return false;
+	}
+
+	if(query("SELECT * FROM users_table WHERE user_name = '$userName'")) {
+		echo
+			"<script>
+				alert('Username sudah terdaftar!');
+				document.location.href ='register.php';
+			</script>";
+			return false;
+	}
+
+	if($userPassword !== $userPassword02) {
+		echo
+		"<script>
+		alert('Password dan Konfirmasi Password tidak sesuai!');
+		document.location.href = 'register.php';
+		</script>";
+		return false;
+	}
+	if(strlen($userPassword) < 5) {
+		echo
+			"<script>
+				alert('Password terlalu pendek!');
+				document.location.href = 'register.php';
+			</script>";
+			return false;
+	}
+
+	$userPasswordHash = password_hash($userPassword, PASSWORD_DEFAULT);
+	$query = "INSERT INTO users_table VALUES ('$userName','$userPasswordHash')";
+	mysqli_query($conn, $query) or die(mysqli_error($conn));
+	return mysqli_affected_rows($conn);
 }

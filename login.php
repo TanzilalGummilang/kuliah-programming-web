@@ -44,12 +44,14 @@ if(isset($_POST['btnLogin'])) {
             <input type="password" name="userPassword" placeholder="masukan password" required>
          </label>
       </li>
+      <br>
       <button type="submit" name="btnLogin">Login</button>
-      <br><br>
-      <label>Belum punya akun?</label>
-      <a href="register.php">Daftar Akun</a>
+      <br>
    </ul>
 </form>
+
+<label>Belum punya akun?</label>
+<a href="register.php">Daftar Akun</a>
 
 </body>
 </html>

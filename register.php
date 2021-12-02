@@ -1,3 +1,23 @@
+<?php 
+require 'functions.php';
+
+if(isset($_POST['btnRegister'])) {
+   if(register($_POST) > 0) {
+      echo
+			"<script>
+				alert('User baru ditambahkan.');
+				document.location.href = 'login.php';
+			</script>";
+   } else {
+      echo
+			"<script>
+				alert('User baru gagal ditambahkan!');
+				document.location.href('register.php');
+			</script>";
+   }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +54,8 @@
       <button type="submit" name="btnRegister">Daftar</button>
    </ul>
 </form>
+
+<a href="login.php">Kembali ke Login</a>
 
 </body>
 </html>
