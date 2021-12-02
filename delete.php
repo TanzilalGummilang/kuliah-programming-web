@@ -1,12 +1,17 @@
 <?php 
+session_start();
 require 'functions.php';
 
-if(!isset($_GET['player_code'])) {
+if(!isset($_GET['playerCode'])) {
 header("location: index.php");
 exit;
 }
+if(!isset($_SESSION['login'])) {
+   header("location: login.php");
+   exit;
+}
 
-$playerCode = $_GET['player_code'];
+$playerCode = $_GET['playerCode'];
 
 if(delete($playerCode) > 0) {
    echo  

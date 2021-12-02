@@ -1,12 +1,17 @@
 <?php 
 require 'functions.php';
+session_start();
 
-if(!isset($_GET['player_code'])) {
+if(!isset($_GET['playerCode'])) {
 	header("location: index.php");
 	exit;
 }
+if(!isset($_SESSION['login'])) {
+   header("location: login.php");
+   exit;
+}
 
-$playerCode = $_GET['player_code'];
+$playerCode = $_GET['playerCode'];
 $player = query("SELECT * FROM players_table WHERE player_code = '$playerCode'");
 
 $birthDateFormat = dateFormat($player['birth_date']);
@@ -75,9 +80,9 @@ $contractDateFormat = dateFormat($player['contract_expire']);
 </table>
 
 <br>
-<a href="update.php?player_code=<?= $player['player_code']; ?>">Update</a> 
+<a href="update.php?playerCode=<?= $player['player_code']; ?>">Update</a> 
 | 
-<a href="delete.php?player_code=<?= $player['player_code']; ?>" onclick="return confirm('yakin hapus data ?');">Hapus</a>
+<a href="delete.php?playerCode=<?= $player['player_code']; ?>" onclick="return confirm('yakin hapus data ?');">Hapus</a>
 <br><br><a href="index.php">Kembali ke Halaman Data Pemain</a>
 
 </body>

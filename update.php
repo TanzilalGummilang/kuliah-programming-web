@@ -1,15 +1,20 @@
-<?php 
+<?php
+session_start();
 require 'functions.php';
 
-if(!isset($_GET['player_code'])) {
+if(!isset($_GET['playerCode'])) {
 	header("location: index.php");
 	exit;
 }
+if(!isset($_SESSION['login'])) {
+   header("location: login.php");
+   exit;
+}
 
-$playerCode = $_GET['player_code'];
+$playerCode = $_GET['playerCode'];
 $player = query("SELECT * FROM players_table WHERE player_code = '$playerCode'");
 
-if(isset($_POST['update'])) {
+if(isset($_POST['btnUpdate'])) {
    if(update($_POST) > 0) {
    echo  "<script>
          alert('data berhasil di update');
@@ -113,7 +118,7 @@ if(isset($_POST['update'])) {
             <input type="date" name="contractExpire" value="<?= $player['contract_expire']; ?>">
          </label>
       </li>
-      <button type="submit" name="update">Update Data</button>
+      <button type="submit" name="btnUpdate">Update Data</button>
    </ul>
 </form>
 

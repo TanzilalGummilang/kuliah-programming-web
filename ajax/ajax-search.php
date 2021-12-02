@@ -1,38 +1,8 @@
 <?php 
-session_start();
-require 'functions.php';
-
-if(!isset($_SESSION['login'])) {
-   header("location: login.php");
-   exit;
-}
-
-$players = query("SELECT * FROM players_table");
-
-// if(isset($_POST['btnSearch'])) {
-// 	$players = searchData($_POST['keyword']);
-// }
-
+require '../functions.php';
+$players = searchData($_GET['keyword']);
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Data Pemain</title>
-</head>
-<body>
-
-
-<a href="logout.php" onclick="return confirm('yakin logout?');">Logout</a>
-<h2>Data Pemain</h2>
-<a href="insert.php">Tambah Data</a> <br><br>
-
-<form action="" method="POST">
-	<input type="text" name="keyword" placeholder="masukan keyword..." size="40" autocomplete="off" autofocus class="keyword">
-	<button type="submit" name="btnSearch" class="btnSearch">Cari</button><br><br>
-</form>
-
-<div class="container">
 <table border="1" cellpadding="10" cellspacing="0">
 
 	<tr>
@@ -67,8 +37,3 @@ $players = query("SELECT * FROM players_table");
 	<?php $i++; ?>
 	<?php endforeach; ?>
 </table>
-</div>
-
-<script src="js/script.js"></script>
-</body>
-</html>
