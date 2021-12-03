@@ -21,7 +21,6 @@ function query($query) {
 	return $rows;
 }
 
-
 // format tgl lahir
 function dateFormat($dateFormat) {
 	$date = substr($dateFormat, 8, 2);
@@ -70,6 +69,54 @@ function getMonth($month) {
 	}
 }
 
+function uploadImage() {
+	$fileName = $_FILES['playerImage']['name'];
+	// $fileType = $_FILES['playerImage']['type'];
+	$fileTmpName = $_FILES['playerImage']['tmp_name'];
+	$fileError = $_FILES['playerImage']['error'];
+	$fileSize = $_FILES['playerImage']['size'];
+
+	if($fileError == 4) {
+		echo
+			"<script>
+				alert('pilih gambar terlebih dahulu!');
+			</script>";
+		return false;
+	}
+
+	$fileExtensionList = ['jpg','jpeg','png'];
+	$fileExtension = explode('.',$fileName);
+	$fileExtension = strtolower(end($fileExtension));
+	if(!in_array($fileExtension, $fileExtensionList)) {
+		echo
+			"<script>
+				alert('pilih gambar berekstensi (jpg, jpeg, png)!');
+			</script>";
+		return false;
+	}
+
+	/* if($fileType != 'image/jpeg' && $fileType != 'image/png') {
+		echo
+			"<script>
+				alert('yg anda pilih bukan gambar!');
+			</script>";
+		return false;
+	} */
+
+	if($fileSize > 3000000) {
+		echo
+			"<script>
+				alert('ukuran file terlalu besar!');
+			</script>";
+		return false;
+	}
+
+	$fileNewName = uniqid();
+	$fileNewName .= '.';
+	$fileNewName .= $fileExtension;
+	move_uploaded_file($fileTmpName, 'img/'. $fileNewName);
+	return $fileNewName;
+}
 
 function insert($data) {
 	$conn = connect();
@@ -80,12 +127,17 @@ function insert($data) {
 	$birthDate = htmlspecialchars($data['birthDate']);
 	$height = htmlspecialchars($data['height']);
 	$nationality = htmlspecialchars($data['nationality']);
-	$playerImage = htmlspecialchars($data['playerImage']);
+	// $playerImage = htmlspecialchars($data['playerImage']);
 	$playerNumber = htmlspecialchars($data['playerNumber']);
 	$position = htmlspecialchars($data['position']);
 	$positionDetail = htmlspecialchars($data['positionDetail']);
 	$salary = htmlspecialchars(intval($data['salary']));
 	$contractExpire = htmlspecialchars($data['contractExpire']);
+
+	$playerImage = uploadImage();
+	if(!$playerImage) {
+		return false;
+	}
 
 	$query = 	
 		"INSERT INTO players_table VALUES

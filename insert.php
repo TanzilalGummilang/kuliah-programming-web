@@ -32,7 +32,7 @@ if(isset($_POST['btnInsert'])) {
 <body>
 
 <h2>Tambah Data Pemain</h2>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
    <ul>
       <li>
          <label>
@@ -73,7 +73,7 @@ if(isset($_POST['btnInsert'])) {
       <li>
          <label>
             Gambar :
-            <input type="text" name="playerImage">
+            <input type="file" name="playerImage">
          </label>
       </li>
       <li>
