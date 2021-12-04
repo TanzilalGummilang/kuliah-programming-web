@@ -73,7 +73,8 @@ if(isset($_POST['btnInsert'])) {
       <li>
          <label>
             Gambar :
-            <input type="file" name="playerImage">
+            <img src="img/nophoto02.jpg" width="150" style="display: block;" class="imgPreview">
+            <input type="file" name="playerImage" class="playerImage" onchange="previewImage();">
          </label>
       </li>
       <li>
@@ -117,5 +118,6 @@ if(isset($_POST['btnInsert'])) {
 
 <a href="index.php">kembali</a>
 
+<script src="js/script.js"></script>
 </body>
 </html>

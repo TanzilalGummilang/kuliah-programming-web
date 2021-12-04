@@ -18,3 +18,15 @@ fetch('ajax/ajax-search.php?keyword=' + keyword.value)
    .then((response) => response.text())
    .then((response) => (container.innerHTML = response));
 });
+
+function previewImage() {
+   const playerImage = document.querySelector('.playerImage');
+   const imgPreview = document.querySelector('.imgPreview');
+
+   const oFReader = new FileReader();
+   oFReader.readAsDataURL(playerImage.files[0]);
+
+   oFReader.onload = function (oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+   };
+}

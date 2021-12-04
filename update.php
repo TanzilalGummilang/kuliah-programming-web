@@ -26,6 +26,7 @@ if(isset($_POST['btnUpdate'])) {
          </script>";
    }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ if(isset($_POST['btnUpdate'])) {
 <body>
 
 <h2>Tambah Data Pemain</h2>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
    <ul>
       <li>
          <label>
@@ -78,9 +79,11 @@ if(isset($_POST['btnUpdate'])) {
          </label>
       </li>
       <li>
+         <input type="hidden" name="playerOldImage" value="<?= $player['player_image']; ?>">
          <label>
             Gambar :
-            <input type="text" name="playerImage" value="<?= $player['player_image']; ?>">
+            <img src="img/<?= $player['player_image']; ?>" width="150" style="display: block;" class="imgPreview">
+            <input type="file" name="playerImage" class="playerImage" onchange="previewImage();">
          </label>
       </li>
       <li>
@@ -92,7 +95,7 @@ if(isset($_POST['btnUpdate'])) {
       <li>
          <label for="position">Posisi :</label>
          <select name="position" id="position" >
-            <option value=""><?= $player['position']; ?></option>
+            <option value="<?= $player['position']; ?>"><?= $player['position']; ?></option>
             <option value="Goalkeeper">Goalkeeper</option>
             <option value="Defender">Defender</option>
             <option value="Midfielder">Midfielder</option>
@@ -124,5 +127,6 @@ if(isset($_POST['btnUpdate'])) {
 
 <a href="index.php">kembali</a>
 
+<script src="js/script.js"></script>
 </body>
 </html>

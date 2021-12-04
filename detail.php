@@ -29,7 +29,7 @@ $contractDateFormat = dateFormat($player['contract_expire']);
 <h2>Detail Pemain</h2>
 
 
-<img src="img/<?= $player['player_image']; ?>" height="100">
+<img src="img/<?= $player['player_image']; ?>" height="300">
 <br><br>
 
 <table border="1" cellpadding="5" cellspacing="1">

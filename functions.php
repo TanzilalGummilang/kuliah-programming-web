@@ -77,11 +77,11 @@ function uploadImage() {
 	$fileSize = $_FILES['playerImage']['size'];
 
 	if($fileError == 4) {
-		echo
+		/* echo
 			"<script>
 				alert('pilih gambar terlebih dahulu!');
-			</script>";
-		return false;
+			</script>"; */
+		return 'nophoto02.jpg';
 	}
 
 	$fileExtensionList = ['jpg','jpeg','png'];
@@ -150,6 +150,12 @@ function insert($data) {
 
 function delete($playerCode) {
 	$conn = connect();
+
+	$playerImage = query("SELECT * FROM players_table WHERE player_code = '$playerCode'");
+	if($playerImage['player_image'] != 'nophoto02.jpg') {
+		unlink('img/' . $playerImage['player_image']);
+	}
+
 	mysqli_query($conn, "DELETE FROM players_table WHERE player_code = '$playerCode'") or die(mysqli_error($conn));
 	return mysqli_affected_rows($conn);
 }
@@ -163,12 +169,20 @@ function update($data) {
 	$birthDate = htmlspecialchars($data['birthDate']);
 	$height = htmlspecialchars($data['height']);
 	$nationality = htmlspecialchars($data['nationality']);
-	$playerImage = htmlspecialchars($data['playerImage']);
+	$playerOldImage = htmlspecialchars($data['playerOldImage']);
 	$playerNumber = htmlspecialchars($data['playerNumber']);
 	$position = htmlspecialchars($data['position']);
 	$positionDetail = htmlspecialchars($data['positionDetail']);
 	$salary = htmlspecialchars(intval($data['salary']));
 	$contractExpire = htmlspecialchars($data['contractExpire']);
+
+	$playerImage = uploadImage();
+	if(!$playerImage) {
+		return false;
+	}
+	if($playerImage == 'nophoto02.jpg') {
+		$playerImage = $playerOldImage;
+	}
 
 	$query =
 		"UPDATE players_table SET
