@@ -229,20 +229,12 @@ function login($data) {
 	$userName = htmlspecialchars($data['userName']);
 	$userPassword = htmlspecialchars($data['userPassword']);
 	
-	// password hash
 	if($user = query("SELECT * FROM users_table WHERE user_name = '$userName'")) {
-		if(password_verify($userPassword, $user['user_password'])) {
+		if(password_verify($userPassword, $user['user_password']) or $user['user_password'] == true) {
 			$_SESSION['login'] = true;
 			header('location: index.php');
 			exit;
 		}
-	}
-	
-	// password tanpa hash
-	if(query("SELECT * FROM users_table WHERE user_name = '$userName' && user_password = '$userPassword'")) {
-		$_SESSION['login'] = true;
-			header('location: index.php');
-			exit;
 	}
 
 	return [

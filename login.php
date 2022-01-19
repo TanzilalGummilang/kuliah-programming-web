@@ -35,13 +35,13 @@ if(isset($_POST['btnLogin'])) {
       <li>
          <label>
             Username :
-            <input type="text" name="userName" placeholder="masukan username" required autofocus autocomplete="off">
+            <input type="text" name="userName" placeholder="admin01" required autofocus autocomplete="off">
          </label>
       </li>
       <li>
          <label>
             Password :
-            <input type="password" name="userPassword" placeholder="masukan password" required>
+            <input type="password" name="userPassword" placeholder="admin01" required>
          </label>
       </li>
       <br>

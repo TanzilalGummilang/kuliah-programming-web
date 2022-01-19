@@ -8,6 +8,7 @@ materi yg diajarkan:
 
 catatan:
 - saya membuat website yg menampilkan squad chelsea fc
+- masih menggunakan paradigma 'prosedural' (blm pake oop, mvc, ataupun pake framework)
 - datanya nyari sendiri (blm pake api)
 - websitenya masih polos blm ada css nya
 - pertemuannya digabung semua jadi se-folder
