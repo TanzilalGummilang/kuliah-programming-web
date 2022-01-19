@@ -228,7 +228,8 @@ function login($data) {
 
 	$userName = htmlspecialchars($data['userName']);
 	$userPassword = htmlspecialchars($data['userPassword']);
-
+	
+	// password hash
 	if($user = query("SELECT * FROM users_table WHERE user_name = '$userName'")) {
 		if(password_verify($userPassword, $user['user_password'])) {
 			$_SESSION['login'] = true;
@@ -236,6 +237,14 @@ function login($data) {
 			exit;
 		}
 	}
+	
+	// password tanpa hash
+	if(query("SELECT * FROM users_table WHERE user_name = '$userName' && user_password = '$userPassword'")) {
+		$_SESSION['login'] = true;
+			header('location: index.php');
+			exit;
+	}
+
 	return [
 		'error' => true,
 		'pesan' => 'Username atau Password salah!'

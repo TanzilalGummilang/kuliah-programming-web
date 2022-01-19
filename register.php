@@ -41,7 +41,7 @@ if(isset($_POST['btnRegister'])) {
       <li>
          <label>
             Password :
-            <input type="password" name="userPassword01" required>
+            <input type="password" name="userPassword" required>
          </label>
       </li>
       <li>
