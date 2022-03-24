@@ -15,9 +15,9 @@ catatan:
 - pertemuan terakhir pd tutorialnya (web hosting) blm di ikutin, jadi masih website di local komputer
 
 tools:
-- XAMPP
+- XAMPP 8.0.13
 - Git & GitHub
 - text editor: vscode
 - server: localhost (on XAMPP)
 - dbms: phpmyadmin (on XAMPP)
-- PHP on XAMMP
+- PHP 8.0 (on XAMMP)
