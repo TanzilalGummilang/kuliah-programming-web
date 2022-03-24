@@ -1,7 +1,7 @@
 <?php
 
 function connect() {
-	return mysqli_connect('localhost', 'root', '', 'db_chelsea_fc');
+	return mysqli_connect('localhost', 'root', '', 'db_wpu_kuliah-pw');
 }
 
 

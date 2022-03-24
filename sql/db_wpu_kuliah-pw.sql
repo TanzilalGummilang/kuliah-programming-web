@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2021 at 01:11 AM
+-- Generation Time: Mar 24, 2022 at 01:14 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_chelsea_fc`
+-- Database: `db_wpu_kuliah-pw`
 --
 
 -- --------------------------------------------------------
@@ -90,11 +90,17 @@ CREATE TABLE `users_table` (
 --
 
 INSERT INTO `users_table` (`user_name`, `user_password`) VALUES
-('admin01', 'admin01'),
-('admin02', 'admin02'),
+('admin01', '$2y$10$JNRxyUcNYIqtAeIhzosMiOOz40KdXckuUhfQAkvOrtBZwWS1zL2UO'),
+('admin02', '$2y$10$FT6xVd1M9Yu/ekXQ4XejQOx2RUqyNYKd/QZrvhmRlYMnRbx2NzrkW'),
 ('admin03', '$2y$10$ON/AMdKIc/Pe.9AFT5xPxePTkkPdcFQVtGTeFuFm5jsVk1Mo..0r2'),
 ('admin04', '$2y$10$S7r2PomOsGhMio85zf9gNeiCAL6qlqnZBpuDt9a1sgpxRwtK1brmW'),
-('admin05', '$2y$10$1/JZUDDjeVjQk7oFS/0RO.vY3uZvBSKUJwQYx8OwUMFye0W8R75iu');
+('admin05', '$2y$10$1/JZUDDjeVjQk7oFS/0RO.vY3uZvBSKUJwQYx8OwUMFye0W8R75iu'),
+('admin06', '$2y$10$xksV8JtCBy4.o3KL7F1OHufobjCPYNEIEyUS46rgK9dLP4QZuTfbi'),
+('admin07', '$2y$10$SU4tKTagVB.NK9iSUVLW.OJlbcFlJU3CkA1Z/UcxOUoc.qe.jlKwW'),
+('admin08', '$2y$10$tRIpksm.eAh19AFusnRwiOWOGAyeU2NCBBbk/kUdi.kP9AGpBYobe'),
+('admin09', '$2y$10$in/78jZAANT9u16Z2z2TDukTgLTyGh8kmNNja5kyJ8OBNqHrum5uK'),
+('admin10', '$2y$10$XLGASHhYZxHrAAC8aBXJNuGvIASss7ebj3SkTVK2DdR0UR71mxKXe'),
+('admin11', '$2y$10$Da7CFqVaSAV3PR29AR2skOK0a3gMnb1wFstrnAscVMzzpPYlxeESm');
 
 --
 -- Indexes for dumped tables
